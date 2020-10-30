@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import PieceImage from './PieceImage'
 import { gameBoardTilePressed } from './quartoSlice'
 
 const GameBoardTile = ({pieceId, tileIndex}) => {
@@ -12,7 +13,7 @@ const GameBoardTile = ({pieceId, tileIndex}) => {
         <div 
         className="game-board-tile"
         onClick={handleGameTilePressed}>
-            {pieceId === null ? 'Tile' : pieceId }
+            {pieceId === null ? '' : (<PieceImage pieceId={pieceId} />) }
         </div>
     )
 }

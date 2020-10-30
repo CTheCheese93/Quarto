@@ -11,12 +11,7 @@ const AvailablePieces = () => {
 
         return (
             <div key={pieceId}>
-                <PieceCard 
-                    size={size} 
-                    color={color} 
-                    core={core} 
-                    shape={shape} 
-                    pieceId={pieceId}
+                <PieceCard pieceId={pieceId}
                     />
                 <hr />
             </div>

@@ -6,10 +6,10 @@ const GameHistoryCard = ({player, phase, pieceId = null}) => {
         <div className="history-card">
             <div className="history-card-title">
                 <span className="player-name">{player}</span>
-                <span className="event-time">{eventTime}</span>
+                {/* <span className="event-time">{eventTime}</span> */}
             </div>
             <div className="message">
-                {HISTORY_MESSAGE_TEMPLATES[phase](player)}
+                {/* {HISTORY_MESSAGE_TEMPLATES[phase](player)} */}
             </div>
             {
                 pieceId === null

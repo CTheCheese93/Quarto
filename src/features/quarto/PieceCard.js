@@ -1,9 +1,10 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import PieceImage from './PieceImage'
 import { pieceCardClicked } from './quartoSlice'
 
 
-const PieceCard = ({pieceId, size, color, core, shape}) => {
+const PieceCard = ({pieceId}) => {
     const dispatch = useDispatch()
     const handlePieceCardClicked = (e) => {
         dispatch(pieceCardClicked({pieceId}))
@@ -11,11 +12,7 @@ const PieceCard = ({pieceId, size, color, core, shape}) => {
 
     return (
         <div className="piece-card" onClick={handlePieceCardClicked}>
-            <b>{pieceId}</b><br />
-            Size: {size}<br />
-            Color: {color}<br />
-            Core: {core}<br />
-            Shape: {shape}
+            <PieceImage pieceId={pieceId} />
         </div>
     )
 }

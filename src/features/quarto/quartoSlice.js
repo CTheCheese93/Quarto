@@ -26,7 +26,7 @@ const generatePieces = () => {
             for (coreIndex = 0; coreIndex < 2; coreIndex++) {
                 for (shapeIndex = 0; shapeIndex < 2; shapeIndex++) {
                     const piece = { 
-                        pieceId: `${sizeIndex}${colorIndex}${coreIndex}${shapeIndex}`, 
+                        pieceId: `${sizeIndex}${coreIndex}${colorIndex}${shapeIndex}`, 
                         size: SIZE[sizeIndex], 
                         color: COLOR[colorIndex], 
                         core: CORE[coreIndex], 

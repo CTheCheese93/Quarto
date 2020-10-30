@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { PHASE_TEMPLATES } from './CONSTANTS'
+import PieceImage from './PieceImage'
 import { selectCurrentPhase, selectCurrentPlayer, selectPlayerHasWon, selectPlayers, selectSelectedPiece } from './quartoSlice'
 
 
@@ -31,7 +32,7 @@ const GamePhaseTracker = () => {
                 Do you want to play again?
             </div>
             <div className="selected-piece">
-                {selectedPiece}
+                { selectedPiece === null ? '' : (<PieceImage pieceId={selectedPiece} />) }
             </div>
         </div>
     )
