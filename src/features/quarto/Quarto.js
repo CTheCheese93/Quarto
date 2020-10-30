@@ -2,18 +2,10 @@ import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import AvailablePieces from './AvailablePieces'
 import GameBoard from './GameBoard'
+import GameHistory from './GameHistory'
 import GamePhaseTracker from './GamePhaseTracker'
 import LocalPlayForm from './LocalPlayForm'
 import RoomRoster from './RoomRoster'
-
-
-const GameHistory = () => {
-    return (
-        <div className="game-history">
-            Game History Not Implemented!
-        </div>
-    )
-}
 
 const Quarto = () => {
     return (
