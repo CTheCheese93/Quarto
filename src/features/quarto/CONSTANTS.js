@@ -34,6 +34,11 @@ export const PHASE_TEMPLATES = {
     PLACE: (player) => `${player} is placing the piece`
 }
 
+export const HISTORY_MESSAGE_TEMPLATES = {
+    PICK: (player) => `${player} has picked a piece:`,
+    PLACE: (player) => `${player} has placed piece at (Not Implemented)`
+}
+
 export const PHASE = {
     0: PHASE_OPTIONS[0],
     1: PHASE_OPTIONS[1],
