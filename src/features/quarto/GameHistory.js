@@ -5,6 +5,13 @@ import { selectGameHistory } from './quartoSlice'
 
 
 const GameHistory = () => {
+    const gameHistoryStyle = {
+        padding: '10px',
+        borderRadius: '45px 0px 0px 0px',
+        background: '#fff',
+        marginTop: '10px'
+    }
+
     const gameHistory = useSelector(selectGameHistory)
 
     const gameHistoryCards = gameHistory.map(({player, phase, pieceId, tileIndex}, i) => {
@@ -18,7 +25,9 @@ const GameHistory = () => {
     })
 
     return (
-        <div className="game-history">
+        <div className="game-history" style={gameHistoryStyle}>
+            <div className="title dark">Game History</div>
+            <div className="stepper">Stepper Goes Here</div>
             {gameHistoryCards}
         </div>
     )

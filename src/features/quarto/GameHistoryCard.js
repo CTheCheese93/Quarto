@@ -6,22 +6,36 @@ import PieceImage from './PieceImage'
 import { selectPlayers } from './quartoSlice'
 
 const GameHistoryCard = ({player, phase, pieceId, eventTime}) => {
+    const ghcStyle = {
+        marginTop: '10px',
+        padding: '10px'
+    }
+
+    const messageStyle = {
+        marginTop: '10px'
+    }
+
+    const pieceSectionStyle = {
+        marginTop: '15px'
+    }
+
     const players = useSelector(selectPlayers)
     const currentPlayer = players.find(p => p.role === player)
 
     return (
-        <div className="history-card">
-            <div className="history-card-title">
+        <div className="history-card" style={ghcStyle}>
+            <div className="caption">
+                {currentPlayer.name}
                 <TimeAgo timestamp={eventTime} />
             </div>
-            <div className="message">
+            <div className="message" style={messageStyle}>
                 {HISTORY_MESSAGE_TEMPLATES[phase](currentPlayer.name)}
             </div>
             {
                 (pieceId === null || phase === PHASE.PLACE)
                 ? ''
                 : (
-                    <div className="piece-section">
+                    <div className="piece-section" style={pieceSectionStyle}>
                         <PieceImage pieceId={pieceId} />
                     </div>
                 )

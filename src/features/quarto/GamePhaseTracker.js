@@ -6,6 +6,32 @@ import { selectCurrentPhase, selectCurrentPlayer, selectPlayerHasWon, selectPlay
 
 
 const GamePhaseTracker = () => {
+    const barStyle = {
+        height: '2px',
+        background: '#000',
+        width: '30%',
+        margin: '0px 10px 0px 10px'
+    }
+
+    const spacerPiece = {
+        height: '100px',
+        width: '100px',
+    }
+
+    const gptStyle = {
+        background: '#fff',
+        borderRadius: '0px 0px 45px 0px',
+        padding: '10px'
+    }
+
+    const selectedPieceStyle = {
+        marginTop: '15px',
+        height: '100px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+
     const currentPhase = useSelector(selectCurrentPhase)
     const currentPlayer = useSelector(selectCurrentPlayer)
     const selectedPiece = useSelector(selectSelectedPiece)
@@ -14,25 +40,27 @@ const GamePhaseTracker = () => {
     const player = players.find(p => p.role === currentPlayer)
     
     return (
-        <div className="game-phase-tracker">
-            <div className={`player-turn ${playerHasWon ? 'hidden' : ''}`}>
+        <div className="game-phase-tracker" style={gptStyle}>
+            <div className={`title dark ${playerHasWon ? 'hidden' : ''}`}>
                 {Boolean(player) ? player.name : 'Someone'}'s Turn
             </div>
-            <div className={`player-turn ${playerHasWon ? '' : 'hidden'}`}>
+            <div className={`title dark ${playerHasWon ? '' : 'hidden'}`}>
                 {Boolean(player) ? player.name : 'Someone'} has won!
             </div>
-            <div className={`phase-instructions ${playerHasWon ? 'hidden' : ''}`}>
+            <div className={`caption ${playerHasWon ? 'hidden' : ''}`}>
                 {
                     Boolean(player)
                     ? PHASE_TEMPLATES[currentPhase](player.name)
                     : 'You must start a game!'
                 }
             </div>
-            <div className={`phase-instructions ${playerHasWon ? '' : 'hidden'}`}>
+            <div className={`caption ${playerHasWon ? '' : 'hidden'}`}>
                 Do you want to play again?
             </div>
-            <div className="selected-piece">
-                { selectedPiece === null ? '' : (<PieceImage pieceId={selectedPiece} />) }
+            <div className="selected-piece" style={selectedPieceStyle}>
+                <div style={barStyle} />
+                { selectedPiece === null ? <div style={spacerPiece} /> : (<PieceImage pieceId={selectedPiece} />) }
+                <div style={barStyle} />
             </div>
         </div>
     )

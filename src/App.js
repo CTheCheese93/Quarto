@@ -3,8 +3,12 @@ import './App.css';
 import Quarto from './features/quarto/Quarto';
 
 function App() {
+  const appStyle = {
+    background: '#536B78'
+  }
+
   return (
-    <div className="App">
+    <div className="App" style={appStyle}>
       <Quarto />
     </div>
   );
