@@ -18,6 +18,8 @@ const Quarto = () => {
     const rightPanelStyle = {
         paddingRight: '0px',
         height: '100vh',
+        display: 'flex',
+        flexDirection: 'column'
     }
 
     return (

@@ -7,9 +7,11 @@ import { selectGameHistory } from './quartoSlice'
 const GameHistory = () => {
     const gameHistoryStyle = {
         padding: '10px',
-        borderRadius: '45px 0px 0px 0px',
+        borderRadius: '35px 0px 0px 0px',
         background: '#fff',
-        marginTop: '10px'
+        marginTop: '10px',
+        flex: '1',
+        overflow: 'hidden',
     }
 
     const gameHistory = useSelector(selectGameHistory)
@@ -28,7 +30,9 @@ const GameHistory = () => {
         <div className="game-history" style={gameHistoryStyle}>
             <div className="title dark">Game History</div>
             <div className="stepper">Stepper Goes Here</div>
-            {gameHistoryCards}
+            <div className="gameHistoryList">
+                {gameHistoryCards}
+            </div>
         </div>
     )
 }
