@@ -10,13 +10,6 @@ const PieceCard = ({pieceId}) => {
         background: '#000',
         width: '12.5px'
     }
-    
-    const areaStyle = {
-        flex: '0 50%',
-        display: 'flex',
-        justifyContent: 'center',
-        padding: '10px 0px 10px 0px',
-    }
 
     const pieceCardStyle = {
         width: '125px',
@@ -25,6 +18,8 @@ const PieceCard = ({pieceId}) => {
         background: '#fff',
         display: 'flex',
         alignItems: 'center',
+        margin: '10px',
+        minHeight: 'min-content',
     }
 
     const dispatch = useDispatch()
@@ -33,13 +28,13 @@ const PieceCard = ({pieceId}) => {
     }
 
     return (
-        <div style={areaStyle}>
+        // <div style={areaStyle}>
             <div className="piece-card" style={pieceCardStyle} onClick={handlePieceCardClicked}>
                 <div style={barStyle} />
                 <PieceImage pieceId={pieceId} />
                 <div style={barStyle} />
             </div>
-        </div>
+        // </div>
     )
 }
 

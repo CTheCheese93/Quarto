@@ -5,10 +5,18 @@ import { selectAvailablePieces } from './quartoSlice'
 
 
 const AvailablePieces = () => {
+    const availablePiecesStyle = {
+        flex: '1',
+        display: 'flex',
+        flexDirection: 'column',
+    }
+    
     const pieceListStyle = {
         display: 'flex',
         flexWrap: 'wrap',
-        overflowY: 'scroll',
+        flex: '1',
+        justifyContent: 'space-around',
+        overflow: 'auto',
     }
 
     const availablePieces = useSelector(selectAvailablePieces)
@@ -21,7 +29,7 @@ const AvailablePieces = () => {
     })
 
     return (
-        <div className="available-pieces" style={{maxHeight: '100%'}}>
+        <div className="available-pieces" style={availablePiecesStyle}>
             <div className="title light">Available Pieces</div>
             <div className="piece-list" style={pieceListStyle}>
                 {pieces}
