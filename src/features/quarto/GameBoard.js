@@ -6,7 +6,10 @@ import { selectCurrentBoardSnapshot } from './quartoSlice'
 const GameBoard = () => {
     const gameBoardStyle = {
         display: 'flex',
-        width: '100%'
+        width: '100%',
+        overflow: 'hidden',
+        padding: '3%',
+        background: '#000',
     }
 
     const outlineStyle = {
@@ -15,6 +18,7 @@ const GameBoard = () => {
         borderStyle: 'solid',
         borderRadius: '50%',
         padding: "17%",
+        rotate: '45deg',
     }
 
     const currentBoardSnapshot = useSelector(selectCurrentBoardSnapshot)

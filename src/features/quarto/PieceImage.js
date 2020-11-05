@@ -7,8 +7,17 @@ const PieceImage = ({pieceId}) => {
         height: '100%'
     }
 
+    const pieceImageFrame = {
+        padding: '20%',
+    }
+
     const pieceFileName = generatePieceDescriptionById(pieceId)
-    return (<img src={`${process.env.PUBLIC_URL}/assets/pieces/${pieceFileName}.svg`} style={pieceImageStyle} />)
+    
+    return (
+        <div style={pieceImageFrame}>
+            <img src={`${process.env.PUBLIC_URL}/assets/pieces/${pieceFileName}.svg`} style={pieceImageStyle} />
+        </div>
+    )
 }
 
 export default PieceImage

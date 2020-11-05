@@ -22,6 +22,15 @@ const Quarto = () => {
         flexDirection: 'column'
     }
 
+    const gameBoardAreaStyle = {
+        height: '100vh',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+
     return (
         <Container fluid className="quarto">
             <Row>
@@ -34,7 +43,7 @@ const Quarto = () => {
                     <GamePhaseTracker />
                     <AvailablePieces />
                 </Col>
-                <Col sm={6} className="game-board-area">
+                <Col sm={6} style={gameBoardAreaStyle}>
                     <GameBoard />
                 </Col>
                 <Col sm={3} style={rightPanelStyle}>

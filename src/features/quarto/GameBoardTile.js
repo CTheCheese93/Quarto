@@ -12,7 +12,9 @@ const GameBoardTile = ({pieceId, tileIndex}) => {
 
     const pieceStyle = {
         position: 'absolute',
-        borderStyle: 'solid',
+        borderStyle: 'none',
+        borderRadius: '50%',
+        width: '100%',
     }
 
     const gbtStyle = {
@@ -22,6 +24,8 @@ const GameBoardTile = ({pieceId, tileIndex}) => {
         paddingBottom: '23%',
         display: 'inline-block',
         position: 'relative',
+        rotate: '-45deg',
+        borderRadius: '50%',
     }
 
     const dispatch = useDispatch()
