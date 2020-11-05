@@ -1,21 +1,5 @@
 .hidden { display: none }
 
-.game-board {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.game-board-tile {
-  width: 25%;
-  height: 100px;
-}
-
-.game-board-tile {
-  border-color: #000;
-  border-style: solid;
-  border-width: 2px;
-}
-
 body {
   font-family: Roboto;
   font-style: normal;
