@@ -2,7 +2,7 @@ import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import AvailablePieces from './AvailablePieces'
 import GameBoard from './GameBoard'
-import GameHistory from './GameHistory'
+import GameLog from './GameLog'
 import GamePhaseTracker from './GamePhaseTracker'
 import LocalPlayForm from './LocalPlayForm'
 import RoomRoster from './RoomRoster'
@@ -48,7 +48,7 @@ const Quarto = () => {
                 </Col>
                 <Col sm={3} style={rightPanelStyle}>
                     <RoomRoster />
-                    <GameHistory />
+                    <GameLog />
                 </Col>
             </Row>
         </Container>

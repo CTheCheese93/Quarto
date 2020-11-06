@@ -8,7 +8,7 @@ const initialState = {
     gameStarted: false,
     players: [],
     availablePieces: [],
-    gameHistory: [],
+    gameLog: [],
     selectedPiece: null,
     currentBoardSnapshot: Array(16).fill(null),
     playerHasWon: false
@@ -138,7 +138,7 @@ const quartoSlice = createSlice({
             const phase = state.currentPhase
             state.selectedPiece = pieceId
 
-            state.gameHistory.push({player, phase, pieceId, tileIndex: null, eventTime: new Date().toISOString()})
+            state.gameLog.push({player, phase, pieceId, tileIndex: null, eventTime: new Date().toISOString()})
 
             state.currentStep = nextStep
             state.currentPhase = nextPhase
@@ -161,7 +161,7 @@ const quartoSlice = createSlice({
             state.currentBoardSnapshot[tileIndex] = selectedPieceId
             state.selectedPiece = null
 
-            state.gameHistory.push({player, phase, pieceId: selectedPieceId, tileIndex, eventTime: new Date().toISOString()})
+            state.gameLog.push({player, phase, pieceId: selectedPieceId, tileIndex, eventTime: new Date().toISOString()})
 
             const winningPath = winCheck(state.currentBoardSnapshot)
 
@@ -187,6 +187,6 @@ export const selectCurrentPhase = state => state.quarto.currentPhase
 export const selectSelectedPiece = state => state.quarto.selectedPiece
 export const selectCurrentBoardSnapshot = state => state.quarto.currentBoardSnapshot
 export const selectPlayerHasWon = state => state.quarto.playerHasWon
-export const selectGameHistory = state => state.quarto.gameHistory
+export const selectGameLog = state => state.quarto.gameLog
 
 export default quartoSlice.reducer

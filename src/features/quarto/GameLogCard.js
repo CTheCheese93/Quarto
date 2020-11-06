@@ -5,8 +5,8 @@ import { TimeAgo } from './Helpers'
 import PieceImage from './PieceImage'
 import { selectPlayers } from './quartoSlice'
 
-const GameHistoryCard = ({player, phase, pieceId, eventTime}) => {
-    const ghcStyle = {
+const GameLogCard = ({player, phase, pieceId, eventTime}) => {
+    const glcStyle = {
         marginTop: '10px',
         padding: '10px'
     }
@@ -23,7 +23,7 @@ const GameHistoryCard = ({player, phase, pieceId, eventTime}) => {
     const currentPlayer = players.find(p => p.role === player)
 
     return (
-        <div className="history-card" style={ghcStyle}>
+        <div className="log-card" style={glcStyle}>
             <div className="caption">
                 {currentPlayer.name}
                 <TimeAgo timestamp={eventTime} />
@@ -44,4 +44,4 @@ const GameHistoryCard = ({player, phase, pieceId, eventTime}) => {
     )
 }
 
-export default GameHistoryCard
+export default GameLogCard

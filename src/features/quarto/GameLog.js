@@ -1,11 +1,11 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import GameHistoryCard from './GameHistoryCard'
-import { selectGameHistory } from './quartoSlice'
+import GameLogCard from './GameLogCard'
+import { selectGameLog } from './quartoSlice'
 
 
-const GameHistory = () => {
-    const gameHistoryStyle = {
+const GameLog = () => {
+    const gameLogStyle = {
         padding: '10px',
         borderRadius: '35px 0px 0px 0px',
         background: '#fff',
@@ -14,11 +14,11 @@ const GameHistory = () => {
         overflow: 'hidden',
     }
 
-    const gameHistory = useSelector(selectGameHistory)
+    const gameLog = useSelector(selectGameLog)
 
-    const gameHistoryCards = gameHistory.map(({player, phase, pieceId, tileIndex}, i) => {
+    const gameLogCards = gameLog.map(({player, phase, pieceId, tileIndex}, i) => {
         return (
-            <GameHistoryCard 
+            <GameLogCard 
                 player={player} 
                 phase={phase} 
                 pieceId={pieceId} 
@@ -27,14 +27,14 @@ const GameHistory = () => {
     })
 
     return (
-        <div className="game-history" style={gameHistoryStyle}>
-            <div className="title dark">Game History</div>
+        <div className="game-history" style={gameLogStyle}>
+            <div className="title dark">Game Log</div>
             <div className="stepper">Stepper Goes Here</div>
             <div className="gameHistoryList">
-                {gameHistoryCards}
+                {gameLogCards}
             </div>
         </div>
     )
 }
 
-export default GameHistory
+export default GameLog
