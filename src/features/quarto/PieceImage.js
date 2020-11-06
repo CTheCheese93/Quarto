@@ -1,5 +1,5 @@
 import React from 'react'
-import { generatePieceDescription, generatePieceDescriptionById } from './Helpers'
+import { generatePieceDescriptionById } from './Helpers'
 
 const PieceImage = ({pieceId}) => {
     const pieceImageStyle = {
@@ -11,7 +11,7 @@ const PieceImage = ({pieceId}) => {
     const pieceFileName = generatePieceDescriptionById(pieceId)
     
     return (
-        <img src={`${process.env.PUBLIC_URL}/assets/pieces/${pieceFileName}.svg`} style={pieceImageStyle} />
+        <img src={`${process.env.PUBLIC_URL}/assets/pieces/${pieceFileName}.svg`} alt={pieceFileName} style={pieceImageStyle} />
     )
 }
 

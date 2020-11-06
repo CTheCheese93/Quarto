@@ -26,7 +26,7 @@ const AvailablePieces = () => {
 
     const availablePieces = useSelector(selectAvailablePieces)
     const pieces = availablePieces.map((piece) => {
-        const {pieceId, size, color, core, shape} = piece
+        const {pieceId} = piece
 
         return (
             <PieceCard pieceId={pieceId} key={pieceId} />

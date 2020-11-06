@@ -20,14 +20,15 @@ export const generatePieceDescriptionById = (pieceId) => {
 
 export const TimeAgo = ({timestamp}) => {
     let timeAgo = ''
-    if (timestamp) {
+
+    if (Boolean(timestamp)) {
         const date = parseISO(timestamp)
         const timePeriod = formatDistanceToNow(date)
         timeAgo = `${timePeriod} ago`
     }
 
     return (
-        <span title={timestamp}>
+        <span title={timestamp} style={{float: 'right'}}>
             &nbsp; <i>{timeAgo}</i>
         </span>
     )

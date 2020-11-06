@@ -75,8 +75,6 @@ const winCheck = (boardState) => {
         [3,6,9,12]
     ]
 
-    console.log(boardState)
-
     const winResults = winPaths.map((path) => {
         const piece1 = boardState[path[0]]
         const piece2 = boardState[path[1]]

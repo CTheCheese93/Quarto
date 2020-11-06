@@ -11,28 +11,36 @@ const GameLog = () => {
         background: '#fff',
         marginTop: '10px',
         flex: '1',
+        display: 'flex',
+        flexDirection: 'column',
         overflow: 'hidden',
+    }
+
+    const gllStyle = {
+        overflowY: 'auto',
+        flex: '1',
     }
 
     const gameLog = useSelector(selectGameLog)
 
-    const gameLogCards = gameLog.map(({player, phase, pieceId, tileIndex}, i) => {
+    const gameLogCards = gameLog.map(({player, phase, pieceId, tileIndex, eventTime}, i) => {
         return (
             <GameLogCard 
                 player={player} 
                 phase={phase} 
                 pieceId={pieceId} 
                 tileIndex={tileIndex}
+                timestamp={eventTime}
                 key={i} />)
     })
 
     return (
-        <div className="game-history" style={gameLogStyle}>
+        <div className="game-log" style={gameLogStyle}>
             <div className="title dark">Game Log</div>
-            <div className="stepper">Stepper Goes Here</div>
-            <div className="gameHistoryList">
+            <div className="game-log-list" style={gllStyle}>
                 {gameLogCards}
             </div>
+            <div className="stepper">Stepper Goes Here</div>
         </div>
     )
 }
