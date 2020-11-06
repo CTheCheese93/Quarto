@@ -4,22 +4,20 @@ import PieceImage from './PieceImage'
 import { gameBoardTilePressed } from './quartoSlice'
 
 const GameBoardTile = ({pieceId, tileIndex}) => {
-    const emptyPiece = {
-        background: 'blue',
-        width: '60px',
-        height: '60px'
-    }
-
     const pieceStyle = {
         position: 'absolute',
         borderStyle: 'none',
         borderRadius: '50%',
         width: '100%',
     }
+ 
+    const pieceImageFrame = {
+        padding: '20%',
+    }
 
     const gbtStyle = {
         width: '23%',
-        background: 'red',
+        background: '#CEE5F2',
         margin: '1%',
         paddingBottom: '23%',
         display: 'inline-block',
@@ -41,7 +39,11 @@ const GameBoardTile = ({pieceId, tileIndex}) => {
                 {
                     pieceId === null
                     ? ''
-                    : (<PieceImage pieceId={pieceId} />)
+                    : (
+                        <div style={pieceImageFrame}>
+                            <PieceImage pieceId={pieceId} />
+                        </div>
+                    )
                 }
             </div>
         </div>

@@ -9,15 +9,18 @@ const GameBoard = () => {
         width: '100%',
         overflow: 'hidden',
         padding: '3%',
-        background: '#000',
+        background: '#7C98B3',
+        borderRadius: '2%',
     }
 
     const outlineStyle = {
         width: '100%',
         height: '100%',
         borderStyle: 'solid',
+        borderWidth: '5px',
         borderRadius: '50%',
-        padding: "17%",
+        padding: "14%",
+        borderColor: '#CEE5F2',
         rotate: '45deg',
     }
 
