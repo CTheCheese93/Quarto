@@ -6,9 +6,9 @@ import { pieceCardClicked } from './quartoSlice'
 
 const PieceCard = ({pieceId}) => {
     const barStyle = {
-        height: '3px',
-        background: '#000',
-        width: '12.5px'
+        height: '1px',
+        background: '#7C98B3',
+        width: '10%'
     }
 
     const pieceCardStyle = {
@@ -20,6 +20,11 @@ const PieceCard = ({pieceId}) => {
         alignItems: 'center',
         margin: '10px',
         minHeight: 'min-content',
+        justifyContent: 'space-around',
+    }
+
+    const pieceImageStyle = {
+        width: '60%'
     }
 
     const dispatch = useDispatch()
@@ -28,13 +33,13 @@ const PieceCard = ({pieceId}) => {
     }
 
     return (
-        // <div style={areaStyle}>
-            <div className="piece-card" style={pieceCardStyle} onClick={handlePieceCardClicked}>
-                <div style={barStyle} />
+        <div className="piece-card" style={pieceCardStyle} onClick={handlePieceCardClicked}>
+            <div style={barStyle} />
+            <div style={pieceImageStyle}>
                 <PieceImage pieceId={pieceId} />
-                <div style={barStyle} />
             </div>
-        // </div>
+            <div style={barStyle} />
+        </div>
     )
 }
 

@@ -8,14 +8,14 @@ import { selectCurrentPhase, selectCurrentPlayer, selectPlayerHasWon, selectPlay
 const GamePhaseTracker = () => {
     const barStyle = {
         height: '2px',
-        background: '#000',
+        background: '#7C98B3',
         width: '30%',
         margin: '0px 10px 0px 10px'
     }
 
     const spacerPiece = {
         height: '100px',
-        width: '100px',
+        width: '100%',
     }
 
     const gptStyle = {
