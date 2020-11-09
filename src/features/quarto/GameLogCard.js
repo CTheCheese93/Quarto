@@ -5,7 +5,7 @@ import { TimeAgo } from './Helpers'
 import PieceImage from './PieceImage'
 import { selectPlayers } from './quartoSlice'
 
-const GameLogCard = ({player, phase, pieceId, timestamp}) => {
+const GameLogCard = ({player, phase, pieceId, timestamp, isFirst}) => {
     const players = useSelector(selectPlayers)
     const currentPlayer = players.find(p => p.role === player)
     
@@ -24,6 +24,7 @@ const GameLogCard = ({player, phase, pieceId, timestamp}) => {
 
     const glcStyle = {
         margin: '10px',
+        marginTop: isFirst === true ? 'auto' : '10px',
         padding: '10px',
         borderRadius: '5px',
         background: getPlayerBGColor(),
