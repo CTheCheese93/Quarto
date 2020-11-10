@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
 import { PHASE, PLAYER_ROLE, SIZE, COLOR, SHAPE, CORE } from './CONSTANTS'
 
 const initialState = {
@@ -11,7 +11,8 @@ const initialState = {
     gameLog: [],
     selectedPiece: null,
     currentBoardSnapshot: Array(16).fill(null),
-    playerHasWon: false
+    playerHasWon: false,
+    gameHistory: []
 }
 
 const createPlayer = (name, role) => {
@@ -53,7 +54,7 @@ const gotoNextPhase = (state) => {
     } else if (currentPhase === PHASE.PLACE) {
         nextPhase = PHASE.PICK
         nextPlayer = currentPlayer
-        nextStep = currentStep
+        nextStep = currentStep + 1
     } else {
         console.error("Something went wrong going to next phase")
     }
@@ -104,6 +105,18 @@ const winCheck = (boardState) => {
     }
 }
 
+const createGameHistoryItem = (state) => {
+    return {
+        step: state.currentStep,
+        phase: state.currentPhase,
+        player: state.currentPlayer,
+        availablePieces: state.availablePieces,
+        selectedPiece: state.selectedPiece,
+        currentBoardSnapshot: state.currentBoardSnapshot,
+        gameLog: state.gameLog,
+    }
+}
+
 const quartoSlice = createSlice({
     name: 'quarto',
     initialState,
@@ -125,6 +138,8 @@ const quartoSlice = createSlice({
             state.playerHasWon = false
 
             state.gameStarted = true
+
+            state.gameHistory.push(createGameHistoryItem(state))
         },
         pieceCardClicked: (state, action) => {
             if (state.gameStarted === false || state.currentPhase === PHASE.PLACE)
@@ -138,10 +153,39 @@ const quartoSlice = createSlice({
 
             state.gameLog.push({player, phase, pieceId, tileIndex: null, eventTime: new Date().toISOString()})
 
+            
             state.currentStep = nextStep
             state.currentPhase = nextPhase
             state.currentPlayer = nextPlayer
             state.availablePieces = state.availablePieces.filter(piece => piece.pieceId !== pieceId)
+            
+            if (state.gameHistory.length > state.currentStep + 1) {
+                state.gameHistory = state.gameHistory.slice(0, state.currentStep)
+                state.gameHistory.push(createGameHistoryItem(state))
+            } else {
+                state.gameHistory.push(createGameHistoryItem(state))
+            }
+        },
+        newGamePressed: (state, action) => {
+            console.log("New Game Pressed")
+        },
+        previousTurnPressed: (state) => {
+            const previousStep = state.currentStep === 0 ? 0 : state.currentStep - 1
+
+            if (previousStep === state.currentStep)
+                return
+
+            const gameHistoryState = state.gameHistory[previousStep]
+            state.currentStep = gameHistoryState.step
+            state.currentPhase = gameHistoryState.phase
+            state.currentPlayer = gameHistoryState.player
+            state.availablePieces = gameHistoryState.availablePieces
+            state.selectedPiece = gameHistoryState.selectedPiece
+            state.currentBoardSnapshot = gameHistoryState.currentBoardSnapshot
+            state.gameLog = gameHistoryState.gameLog
+        },
+        nextTurnPressed: (state, action) => {
+            console.log("Next Turn Pressed")
         },
         gameBoardTilePressed: (state, action) => {
             if (state.gameStarted === false || state.currentPhase === PHASE.PICK || state.selectedPiece === null)
@@ -155,14 +199,16 @@ const quartoSlice = createSlice({
 
             if (pieceId !== null)
                 return
-
+                
+                
             state.currentBoardSnapshot[tileIndex] = selectedPieceId
             state.selectedPiece = null
-
+            
             state.gameLog.push({player, phase, pieceId: selectedPieceId, tileIndex, eventTime: new Date().toISOString()})
-
+            
+            
             const winningPath = winCheck(state.currentBoardSnapshot)
-
+            
             if (winningPath.length > 0) {
                 state.playerHasWon = true
                 state.gameStarted = false
@@ -171,11 +217,18 @@ const quartoSlice = createSlice({
                 state.currentPhase = nextPhase
                 state.currentPlayer = nextPlayer
             }
+            
+            if (state.gameHistory.length < state.currentStep + 1) {
+                state.gameHistory = state.gameHistory.slice(0, state.currentStep)
+                state.gameHistory.push(createGameHistoryItem(state))
+            } else {
+                state.gameHistory.push(createGameHistoryItem(state))
+            }
         }
     }
 })
 
-export const { playPressed, pieceCardClicked, gameBoardTilePressed } = quartoSlice.actions
+export const { playPressed, pieceCardClicked, gameBoardTilePressed, newGamePressed, previousTurnPressed, nextTurnPressed } = quartoSlice.actions
 
 export const selectGameStarted = state => state.quarto.gameStarted
 export const selectPlayers = state => state.quarto.players

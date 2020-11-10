@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import GameLogCard from './GameLogCard'
 import { selectGameLog } from './quartoSlice'
+import Stepper from './Stepper'
 
 const setScrollToBottom = ({ element }) => {
     element.current.scrollTop = element.current.scrollHeight
@@ -63,7 +64,7 @@ const GameLog = () => {
             <div className="game-log-list" style={gllStyle} ref={gameLogListRef}>
                 {gameLogCards}
             </div>
-            <div className="stepper">Stepper Goes Here</div>
+            <Stepper />
         </div>
     )
 }
