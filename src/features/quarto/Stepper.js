@@ -16,6 +16,7 @@ const Stepper = () => {
     const buttonStyle = {
         width: '29%',
         borderRadius: '300px',
+        backgroundColor: '#536B78',
     }
 
     const handleNewGamePressed = (e) => {
@@ -24,12 +25,10 @@ const Stepper = () => {
     }
 
     const handlePrevTurnPressed = (e) => {
-        console.log("Hello!")
         dispatch(previousTurnPressed())
     }
 
     const handleNextTurnPressed = (e) => {
-        console.log("Hello!")
         dispatch(nextTurnPressed())
     }
 

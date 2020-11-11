@@ -159,8 +159,9 @@ const quartoSlice = createSlice({
             state.currentPlayer = nextPlayer
             state.availablePieces = state.availablePieces.filter(piece => piece.pieceId !== pieceId)
             
-            if (state.gameHistory.length > state.currentStep + 1) {
-                state.gameHistory = state.gameHistory.slice(0, state.currentStep)
+            if (state.gameHistory.length >= state.currentStep + 1) {
+                const newGameHistory = state.gameHistory.slice(0, state.currentStep)
+                state.gameHistory = newGameHistory
                 state.gameHistory.push(createGameHistoryItem(state))
             } else {
                 state.gameHistory.push(createGameHistoryItem(state))
@@ -185,7 +186,19 @@ const quartoSlice = createSlice({
             state.gameLog = gameHistoryState.gameLog
         },
         nextTurnPressed: (state, action) => {
-            console.log("Next Turn Pressed")
+            const nextStep = state.currentStep + 1
+
+            if (nextStep > state.gameHistory.length - 1)
+                return
+
+            const gameHistoryState = state.gameHistory[nextStep]
+            state.currentStep = gameHistoryState.step
+            state.currentPhase = gameHistoryState.phase
+            state.currentPlayer = gameHistoryState.player
+            state.availablePieces = gameHistoryState.availablePieces
+            state.selectedPiece = gameHistoryState.selectedPiece
+            state.currentBoardSnapshot = gameHistoryState.currentBoardSnapshot
+            state.gameLog = gameHistoryState.gameLog
         },
         gameBoardTilePressed: (state, action) => {
             if (state.gameStarted === false || state.currentPhase === PHASE.PICK || state.selectedPiece === null)
@@ -218,8 +231,9 @@ const quartoSlice = createSlice({
                 state.currentPlayer = nextPlayer
             }
             
-            if (state.gameHistory.length < state.currentStep + 1) {
-                state.gameHistory = state.gameHistory.slice(0, state.currentStep)
+            if (state.gameHistory.length >= state.currentStep + 1) {
+                const newGameHistory = state.gameHistory.slice(0, state.currentStep)
+                state.gameHistory = newGameHistory
                 state.gameHistory.push(createGameHistoryItem(state))
             } else {
                 state.gameHistory.push(createGameHistoryItem(state))
