@@ -6,13 +6,17 @@ const initialState = {
     currentPhase: PHASE.PICK,
     currentPlayer: PLAYER_ROLE.PLAYER_1,
     gameStarted: false,
-    players: [],
+    activePlayers: [],
     availablePieces: [],
     gameLog: [],
+    scores: {
+        "CTC-JH": { "CTC": 1, "JH": 1}
+    },
     selectedPiece: null,
     currentBoardSnapshot: Array(16).fill(null),
     playerHasWon: false,
-    gameHistory: []
+    gameHistory: [],
+    currentScoreKey: "",
 }
 
 const createPlayer = (name, role) => {
@@ -123,17 +127,31 @@ const quartoSlice = createSlice({
     reducers: {
         playPressed: (state, action) => {
             const { player1, player2, player2isFirst } = action.payload
+            const sortedPlayers = [player1, player2].sort()
+            const scoreKey = `${sortedPlayers[0]}-${sortedPlayers[1]}`
+
+            if (!(scoreKey in state.scores)){    
+                state.scores[scoreKey] = {
+                    [player1]: 0,
+                    [player2]: 0
+                }
+            }
+            
+            state.currentScoreKey = scoreKey
 
             const players = [player1, player2].map((name, index) => {
-                return createPlayer(name, PLAYER_ROLE[index])
+                return {name, role: PLAYER_ROLE[index]}
             })
-            state.players = players
+
+            state.activePlayers = players
+
             player2isFirst 
             ? state.currentPlayer = PLAYER_ROLE.PLAYER_2 
             : state.currentPlayer = PLAYER_ROLE.PLAYER_1
 
             state.availablePieces = generatePieces()
             state.currentBoardSnapshot = Array(16).fill(null)
+            state.gameHistory = []
             state.currentPhase = PHASE.PICK
             state.playerHasWon = false
 
@@ -207,7 +225,7 @@ const quartoSlice = createSlice({
             const { pieceId, tileIndex } = action.payload
             const selectedPieceId = state.selectedPiece
             const { nextStep, nextPhase, nextPlayer }= gotoNextPhase(state)
-            const player = state.currentPlayer
+            const player = state.activePlayers.find(p => p.role === state.currentPlayer)
             const phase = state.currentPhase
 
             if (pieceId !== null)
@@ -217,12 +235,20 @@ const quartoSlice = createSlice({
             state.currentBoardSnapshot[tileIndex] = selectedPieceId
             state.selectedPiece = null
             
-            state.gameLog.push({player, phase, pieceId: selectedPieceId, tileIndex, eventTime: new Date().toISOString()})
+            state.gameLog.push({
+                player: player.role,
+                phase,
+                pieceId: selectedPieceId,
+                tileIndex,
+                eventTime: new Date().toISOString()
+            })
             
             
             const winningPath = winCheck(state.currentBoardSnapshot)
             
             if (winningPath.length > 0) {
+                state.scores[state.currentScoreKey][player.name] += 1
+
                 state.playerHasWon = true
                 state.gameStarted = false
             } else {
@@ -245,7 +271,7 @@ const quartoSlice = createSlice({
 export const { playPressed, pieceCardClicked, gameBoardTilePressed, newGamePressed, previousTurnPressed, nextTurnPressed } = quartoSlice.actions
 
 export const selectGameStarted = state => state.quarto.gameStarted
-export const selectPlayers = state => state.quarto.players
+export const selectPlayers = state => state.quarto.activePlayers
 export const selectAvailablePieces = state => state.quarto.availablePieces
 export const selectCurrentPlayer = state => state.quarto.currentPlayer
 export const selectCurrentPhase = state => state.quarto.currentPhase
@@ -253,5 +279,7 @@ export const selectSelectedPiece = state => state.quarto.selectedPiece
 export const selectCurrentBoardSnapshot = state => state.quarto.currentBoardSnapshot
 export const selectPlayerHasWon = state => state.quarto.playerHasWon
 export const selectGameLog = state => state.quarto.gameLog
+export const selectScores = state => state.quarto.scores
+export const selectCurrentScoreKey = state => state.quarto.currentScoreKey
 
 export default quartoSlice.reducer
