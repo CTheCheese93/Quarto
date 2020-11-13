@@ -1,3 +1,5 @@
+import { findCoordinates } from "./Helpers"
+
 const PLAYER_ROLE_OPTIONS = {
     0: 'PLAYER_1',
     1: 'PLAYER_2',
@@ -35,8 +37,11 @@ export const PHASE_TEMPLATES = {
 }
 
 export const HISTORY_MESSAGE_TEMPLATES = {
-    PICK: (player) => `${player} has picked a piece:`,
-    PLACE: (player) => `${player} has placed piece at (Not Implemented)`
+    PICK: (player, boardIndex) => `${player} has picked a piece:`,
+    PLACE: (player, boardIndex) => {
+        let coords = findCoordinates(boardIndex, 4, true)
+        return `${player} has placed piece at (${coords.x}, ${coords.y})`
+    }
 }
 
 export const PHASE = {

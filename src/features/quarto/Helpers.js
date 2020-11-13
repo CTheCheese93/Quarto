@@ -1,5 +1,6 @@
 import { CORE, SHAPE, SIZE, COLOR } from "./CONSTANTS"
 import { parseISO, formatDistanceToNow } from 'date-fns'
+import { findByLabelText } from "@testing-library/react"
 
 export const generatePieceDescription = ({size, core, color, shape}) => {
     return [size, core, color, shape].map(p => p[0] + p.slice(1).toLowerCase()).join('')
@@ -32,4 +33,20 @@ export const TimeAgo = ({timestamp}) => {
             &nbsp; <i>{timeAgo}</i>
         </span>
     )
+}
+
+const findY = (i, d) => {
+    return Math.floor(i/d)
+}
+
+const findX = (i, d) => {
+    return (i - (d * findY(i, d)))
+}
+
+export const findCoordinates = (index, boardSize, startAtOne = false) => {
+    let offset = startAtOne === false ? 0 : 1
+    return {
+        x: findX(index, boardSize) + offset,
+        y: findY(index, boardSize) + offset
+    }
 }

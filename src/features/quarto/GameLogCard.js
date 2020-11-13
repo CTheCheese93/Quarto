@@ -5,7 +5,7 @@ import { TimeAgo } from './Helpers'
 import PieceImage from './PieceImage'
 import { selectPlayers } from './quartoSlice'
 
-const GameLogCard = ({player, phase, pieceId, timestamp, isFirst}) => {
+const GameLogCard = ({player, phase, pieceId, timestamp, isFirst, tileIndex}) => {
     const players = useSelector(selectPlayers)
     const currentPlayer = players.find(p => p.role === player)
     
@@ -52,7 +52,7 @@ const GameLogCard = ({player, phase, pieceId, timestamp, isFirst}) => {
                 <TimeAgo timestamp={timestamp} />
             </div>
             <div className="message" style={messageStyle}>
-                {HISTORY_MESSAGE_TEMPLATES[phase](currentPlayer.name)}
+                {HISTORY_MESSAGE_TEMPLATES[phase](currentPlayer.name, tileIndex)}
             </div>
             {
                 (pieceId === null || phase === PHASE.PLACE)
