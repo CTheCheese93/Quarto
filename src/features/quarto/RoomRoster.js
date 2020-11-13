@@ -15,6 +15,7 @@ const RoomRoster = () => {
     const playerList = players.map((player) => {
         const playerCardStyle = {
             padding: '5px',
+            paddingLeft: '15px',
             borderRadius: '0px 19px 0px 19px',
             background: '#fff',
             marginTop: '10px'

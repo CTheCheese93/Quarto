@@ -60,7 +60,7 @@ const GameLog = () => {
 
     return (
         <div className="game-log" style={gameLogStyle}>
-            <div className="title dark">Game Log</div>
+            <div className="title dark" style={{textAlign: 'center'}}>Game Log</div>
             <div className="game-log-list" style={gllStyle} ref={gameLogListRef}>
                 {gameLogCards}
             </div>

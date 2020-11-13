@@ -42,7 +42,10 @@ body {
   line-height: 18px;
 }
 
-.game-history > .title, 
+.game-log > .title {
+  text-align: center,
+}
+
 .available-pieces > .title {
   text-align: center;
 }
@@ -53,17 +56,24 @@ html {
   --thumbBG: #536B78;
 }
 
+.game-log::-webkit-scrollbar,
 .piece-list::-webkit-scrollbar {
   width: 11px;
 }
+
+.game-log,
 .piece-list {
   scrollbar-width: thin;
   scrollbar-color: var(--thumbBG) var(--scrollbarBG);
 }
+
+.game-log::-webkit-scrollbar-track,
 .piece-list::-webkit-scrollbar-track {
   background: var(--scrollbarBG);
   border-radius: 5px;
 }
+
+.game-log::-webkit-scrollbar-thumb,
 .piece-list::-webkit-scrollbar-thumb {
   background-color: var(--thumbBG) ;
   border-radius: 5px;
