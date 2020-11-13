@@ -5,6 +5,19 @@ import { Form, Button, Modal } from 'react-bootstrap'
 import { PLAYER_ROLE } from './CONSTANTS'
 
 const LocalPlayForm = () => {
+    const scoreStyle = {
+        display: 'flex',
+        margin: '10px 0',
+    }
+
+    const playerScoreStyle = {
+        flex: '1 33%',
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+    }
+
     const dispatch = useDispatch()
     const gameStarted = useSelector(selectGameStarted)
     const playerHasWon = useSelector(selectPlayerHasWon)
@@ -58,8 +71,26 @@ const LocalPlayForm = () => {
                 <Modal.Title>{playerHasWon ? `${player.name} wins!` : 'Quarto'}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div>
-                    {player1} ({player1Score}) v. {player2} ({player2Score})
+                <div style={scoreStyle}>
+                    <div style={playerScoreStyle}>
+                        <div className="player-name">
+                            {player1}
+                        </div>
+                        <div className="player-score">
+                            {player1Score}
+                        </div>
+                    </div>
+                    <div style={playerScoreStyle}>
+                        -
+                    </div>
+                    <div style={playerScoreStyle}>
+                        <div className="player-name">
+                            {player2}
+                        </div>
+                        <div className="player-score">
+                            {player2Score}
+                        </div>
+                    </div>
                 </div>
                 <Form onSubmit={onPlayClicked}>
                     <Form.Group controlId="player-1">

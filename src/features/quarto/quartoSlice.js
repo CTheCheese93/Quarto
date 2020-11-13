@@ -9,9 +9,7 @@ const initialState = {
     activePlayers: [],
     availablePieces: [],
     gameLog: [],
-    scores: {
-        "CTC-JH": { "CTC": 1, "JH": 1}
-    },
+    scores: {},
     selectedPiece: null,
     currentBoardSnapshot: Array(16).fill(null),
     playerHasWon: false,
