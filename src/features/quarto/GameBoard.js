@@ -25,8 +25,8 @@ const GameBoard = () => {
     }
 
     const currentBoardSnapshot = useSelector(selectCurrentBoardSnapshot)
-    const gameBoardTiles = currentBoardSnapshot.map((tileValue, i) => {
-        return <GameBoardTile pieceId={tileValue} tileIndex={i} key={i} />
+    const gameBoardTiles = currentBoardSnapshot.map(({pieceId, pieceIdBase2}, i) => {
+        return <GameBoardTile pieceId={pieceId} pieceIdBase2={pieceIdBase2} tileIndex={i} key={i} />
     })
 
     return (

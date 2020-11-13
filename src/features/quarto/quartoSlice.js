@@ -11,7 +11,7 @@ const initialState = {
     gameLog: [],
     scores: {},
     selectedPiece: null,
-    currentBoardSnapshot: Array(16).fill(null),
+    currentBoardSnapshot: Array(16).fill({ pieceId: null, pieceIdBase2: null }),
     playerHasWon: false,
     gameHistory: [],
     currentScoreKey: "",
@@ -29,7 +29,7 @@ const generatePieces = () => {
         for (colorIndex = 0; colorIndex < 2; colorIndex++){
             for (coreIndex = 0; coreIndex < 2; coreIndex++) {
                 for (shapeIndex = 0; shapeIndex < 2; shapeIndex++) {
-                    const piece = { 
+                    const piece = {
                         pieceId: `${sizeIndex}${coreIndex}${colorIndex}${shapeIndex}`, 
                         size: SIZE[sizeIndex], 
                         color: COLOR[colorIndex], 
@@ -78,30 +78,69 @@ const winCheck = (boardState) => {
         [3,6,9,12]
     ]
 
+    const byteToInt = (byte) => {
+        let result = 0
+        for (let i = 0; i < byte.length; i++) {
+          const expo = byte.length - 1 - i
+          result += byte[i] * (2 ** expo)
+        }
+        return result
+    }
+
+    const invertBitsAsBase2 = (byte) => {
+        let newByte = ""
+
+        for (let b in byte) {
+            newByte += byte[b] === '0' ? '1' : '0'
+        }
+
+        return byteToInt(newByte)
+    }
+
+    const comparePieces = (pieceArray) => {
+        let check = pieceArray[0] & pieceArray[1] & pieceArray[2] & pieceArray[3]
+        console.log(check, pieceArray)
+        if (check === 0) {
+            return false
+        } else {
+            return true
+        }
+    }
+
     const winResults = winPaths.map((path) => {
         const piece1 = boardState[path[0]]
         const piece2 = boardState[path[1]]
         const piece3 = boardState[path[2]]
         const piece4 = boardState[path[3]]
 
-        if (piece1 === null ||
-            piece2 === null ||
-            piece3 === null ||
-            piece4 === null){
+        if (piece1.pieceIdBase2 === null ||
+            piece2.pieceIdBase2 === null ||
+            piece3.pieceIdBase2 === null ||
+            piece4.pieceIdBase2 === null){
                 return false
         }
-
-        let check = piece1 & piece2 & piece3 & piece4
-        let checkBase2 = check.toString(2)
-        let pieceLog = [piece1, piece2, piece3, piece4].map((p, i) => {
-            return {[`Piece ${i}`]: p.toString(2)}
+        const pieces = [piece1, piece2, piece3, piece4].map((p) => {
+            console.log(p.pieceId, byteToInt(p.pieceId))
+            return byteToInt(p.pieceId)
         })
-        console.log({check, checkBase2, ...pieceLog})
 
-        if (piece1 & piece2 & piece3 & piece4 === 0) {
-            return false
-        } else {
+        const invertedPieces = [piece1, piece2, piece3, piece4].map((p) => {
+            return invertBitsAsBase2(p.pieceId)
+        })
+
+        let check1 = comparePieces(pieces)
+        let check2 = comparePieces(invertedPieces)
+        // let check1Base2 = check1.toString(2)
+        // let check2Base2 = check2.toString(2)
+        // let pieceLog = [piece1, piece2, piece3, piece4].map((p, i) => {
+        //     return {[`Piece ${i}`]: p.pieceId}
+        // })
+        // console.log({check1, check1Base2, check2, check2Base2, ...pieceLog})
+
+        if (check1 || check2) {
             return true
+        } else {
+            return false
         }
     })
 
@@ -155,7 +194,7 @@ const quartoSlice = createSlice({
             : state.currentPlayer = PLAYER_ROLE.PLAYER_1
 
             state.availablePieces = generatePieces()
-            state.currentBoardSnapshot = Array(16).fill(null)
+            state.currentBoardSnapshot = Array(16).fill({ pieceId: null, pieceIdBase2: null })
             state.gameHistory = []
             state.currentPhase = PHASE.PICK
             state.playerHasWon = false
@@ -168,11 +207,11 @@ const quartoSlice = createSlice({
             if (state.gameStarted === false || state.currentPhase === PHASE.PLACE)
                 return
 
-            const { pieceId } = action.payload
+            const { pieceId, pieceIdBase2 } = action.payload
             const { nextStep, nextPhase, nextPlayer }= gotoNextPhase(state)
             const player = state.currentPlayer
             const phase = state.currentPhase
-            state.selectedPiece = pieceId
+            state.selectedPiece = {pieceId, pieceIdBase2}
 
             state.gameLog.push({player, phase, pieceId, tileIndex: null, eventTime: new Date().toISOString()})
 

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import PieceImage from './PieceImage'
 import { gameBoardTilePressed } from './quartoSlice'
 
-const GameBoardTile = ({pieceId, tileIndex}) => {
+const GameBoardTile = ({pieceId, pieceIdBase2, tileIndex}) => {
     const pieceStyle = {
         position: 'absolute',
         borderStyle: 'none',

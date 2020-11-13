@@ -4,7 +4,7 @@ import PieceImage from './PieceImage'
 import { pieceCardClicked } from './quartoSlice'
 
 
-const PieceCard = ({pieceId}) => {
+const PieceCard = ({pieceId, pieceIdBase2}) => {
     const barStyle = {
         height: '1px',
         background: '#7C98B3',
@@ -29,12 +29,12 @@ const PieceCard = ({pieceId}) => {
 
     const dispatch = useDispatch()
     const handlePieceCardClicked = (e) => {
-        dispatch(pieceCardClicked({pieceId}))
+        dispatch(pieceCardClicked({pieceId, pieceIdBase2}))
     }
 
     return (
         <div className="piece-card" style={pieceCardStyle} onClick={handlePieceCardClicked}>
-            <div style={barStyle} />
+            <div style={barStyle} id={pieceId} />
             <div style={pieceImageStyle}>
                 <PieceImage pieceId={pieceId} />
             </div>

@@ -59,7 +59,7 @@ const GamePhaseTracker = () => {
             </div>
             <div className="selected-piece" style={selectedPieceStyle}>
                 <div style={barStyle} />
-                { selectedPiece === null ? <div style={spacerPiece} /> : (<PieceImage pieceId={selectedPiece} />) }
+                { selectedPiece === null ? <div style={spacerPiece} /> : (<PieceImage pieceId={selectedPiece.pieceId} />) }
                 <div style={barStyle} />
             </div>
         </div>
