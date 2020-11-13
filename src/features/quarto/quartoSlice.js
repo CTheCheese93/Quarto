@@ -91,6 +91,13 @@ const winCheck = (boardState) => {
                 return false
         }
 
+        let check = piece1 & piece2 & piece3 & piece4
+        let checkBase2 = check.toString(2)
+        let pieceLog = [piece1, piece2, piece3, piece4].map((p, i) => {
+            return {[`Piece ${i}`]: p.toString(2)}
+        })
+        console.log({check, checkBase2, ...pieceLog})
+
         if (piece1 & piece2 & piece3 & piece4 === 0) {
             return false
         } else {
