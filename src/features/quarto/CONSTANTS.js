@@ -37,7 +37,7 @@ export const PHASE_TEMPLATES = {
 }
 
 export const HISTORY_MESSAGE_TEMPLATES = {
-    PICK: (player, boardIndex) => `${player} has picked a piece:`,
+    PICK: (player) => `${player} has picked a piece:`,
     PLACE: (player, boardIndex) => {
         let coords = findCoordinates(boardIndex, 4, true)
         return `${player} has placed piece at (${coords.x}, ${coords.y})`
