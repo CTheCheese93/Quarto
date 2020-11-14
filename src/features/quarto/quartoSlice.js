@@ -189,13 +189,12 @@ const quartoSlice = createSlice({
 
             state.activePlayers = players
 
-            player2isFirst 
-            ? state.currentPlayer = PLAYER_ROLE.PLAYER_2 
-            : state.currentPlayer = PLAYER_ROLE.PLAYER_1
-
+            state.currentPlayer = player2isFirst ? PLAYER_ROLE.PLAYER_2 : PLAYER_ROLE.PLAYER_1
             state.availablePieces = generatePieces()
             state.currentBoardSnapshot = Array(16).fill({ pieceId: null, pieceIdBase2: null })
+            state.currentStep = 0
             state.gameHistory = []
+            state.gameLog = []
             state.currentPhase = PHASE.PICK
             state.playerHasWon = false
 
