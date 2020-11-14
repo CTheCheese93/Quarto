@@ -24,46 +24,38 @@ const LocalPlayForm = () => {
     const currentPlayer = useSelector(selectCurrentPlayer)
     const players = useSelector(selectPlayers)
     const scores = useSelector(selectScores)
-    const currentScoreKey = useSelector(selectCurrentScoreKey)
     const player = players.find(p => p.role === currentPlayer)
 
-    const _player1 = currentScoreKey !== "" ? players.find(p => p.role === PLAYER_ROLE.PLAYER_1) : ""
-    const _player2 = currentScoreKey !== "" ? players.find(p => p.role === PLAYER_ROLE.PLAYER_2) : ""
-    const _player1Score = currentScoreKey !== "" ? scores[currentScoreKey][_player1.name] : 0
-    const _player2Score = currentScoreKey !== "" ? scores[currentScoreKey][_player2.name] : 0
+    const [player1Name, setPlayer1Name] = useState('')
+    const [player2Name, setPlayer2Name] = useState('')
+    const [player2IsFirst, setPlayer2IsFirst] = useState(false)
 
-    const [player1, setPlayer1] = useState('')
-    const [player2, setPlayer2] = useState('')
-    const [player1Score, setPlayer1Score] = useState(_player1Score)
-    const [player2Score, setPlayer2Score] = useState(_player2Score)
-    const [player2isFirst, setPlayer2isFirst] = useState(false)
-
-    const handlePlayer1Change = (e) => setPlayer1(e.target.value)
-    const handlePlayer2Change = (e) => setPlayer2(e.target.value)
-    const handleisFirstChange = (e) => setPlayer2isFirst(e.target.checked)
+    const handlePlayer1Change = (e) => setPlayer1Name(e.target.value)
+    const handlePlayer2Change = (e) => setPlayer2Name(e.target.value)
+    const handleisFirstChange = (e) => setPlayer2IsFirst(e.target.checked)
 
     const onPlayClicked = (e) => {
         e.preventDefault()
-        if (Boolean(player1) && Boolean(player2)) {
-            dispatch(playPressed({player1, player2, player2isFirst}))
+        if (Boolean(player1Name) && Boolean(player2Name)) {
+            dispatch(playPressed({player1: player1Name, player2: player2Name, player2isFirst: player2IsFirst}))
         }
     }
-
+    
     const checkForScores = () => {
-        if (!Boolean(player1) || !Boolean(player2))
-            return
+        if (!Boolean(player1Name) || !Boolean(player2Name))
+        return [0, 0]
         
-        const sortedPlayers = [player1, player2].sort()
+        const sortedPlayers = [player1Name, player2Name].sort()
         const scoreKey = `${sortedPlayers[0]}-${sortedPlayers[1]}`
         
         if (scoreKey in scores) {
-            setPlayer1Score(scores[scoreKey][player1])
-            setPlayer2Score(scores[scoreKey][player2])
+            return [scores[scoreKey][player1Name], scores[scoreKey][player2Name]]
         } else {
-            setPlayer1Score(0)
-            setPlayer2Score(0)
+            return [0, 0]
         }
     }
+    
+    const [player1Score, player2Score] = checkForScores()
 
     return (
         <Modal show={!gameStarted} className="game-menu">
@@ -74,7 +66,7 @@ const LocalPlayForm = () => {
                 <div style={scoreStyle}>
                     <div style={playerScoreStyle}>
                         <div className="player-name">
-                            {player1}
+                            {player1Name}
                         </div>
                         <div className="player-score">
                             {player1Score}
@@ -85,7 +77,7 @@ const LocalPlayForm = () => {
                     </div>
                     <div style={playerScoreStyle}>
                         <div className="player-name">
-                            {player2}
+                            {player2Name}
                         </div>
                         <div className="player-score">
                             {player2Score}
@@ -95,14 +87,14 @@ const LocalPlayForm = () => {
                 <Form onSubmit={onPlayClicked}>
                     <Form.Group controlId="player-1">
                         <Form.Label>Player 1's Name</Form.Label>
-                        <Form.Control type="text" placeholder="Player 1" name="player1" onChange={handlePlayer1Change} onBlur={checkForScores} value={player1} />
+                        <Form.Control type="text" placeholder="Player 1" name="player1" onChange={handlePlayer1Change} onBlur={checkForScores} value={player1Name} />
                     </Form.Group>
                     <Form.Group controlId="player-2">
                         <Form.Label>Player 2's Name</Form.Label>
-                        <Form.Control type="text" placeholder="Player 2" name="player2" onChange={handlePlayer2Change} onBlur={checkForScores} value={player2} />
+                        <Form.Control type="text" placeholder="Player 2" name="player2" onChange={handlePlayer2Change} onBlur={checkForScores} value={player2Name} />
                     </Form.Group>
                     <Form.Group controlId="player-2-isFirst">
-                        <Form.Check type="checkbox" label="Player 2 starts" name="player2isFirst" onChange={handleisFirstChange} value={player2isFirst} />
+                        <Form.Check type="checkbox" label="Player 2 starts" name="player2isFirst" onChange={handleisFirstChange} value={player2IsFirst} />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Play {playerHasWon ? 'Again' : ''}
