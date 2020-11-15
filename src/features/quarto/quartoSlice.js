@@ -15,6 +15,7 @@ const initialState = {
     playerHasWon: false,
     gameHistory: [],
     currentScoreKey: "",
+    player2IsFirst: false
 }
 
 const createPlayer = (name, role) => {
@@ -190,6 +191,7 @@ const quartoSlice = createSlice({
             state.activePlayers = players
 
             state.currentPlayer = player2isFirst ? PLAYER_ROLE.PLAYER_2 : PLAYER_ROLE.PLAYER_1
+            state.player2IsFirst = player2isFirst
             state.availablePieces = generatePieces()
             state.currentBoardSnapshot = Array(16).fill({ pieceId: null, pieceIdBase2: null })
             state.currentStep = 0
@@ -324,5 +326,6 @@ export const selectPlayerHasWon = state => state.quarto.playerHasWon
 export const selectGameLog = state => state.quarto.gameLog
 export const selectScores = state => state.quarto.scores
 export const selectCurrentScoreKey = state => state.quarto.currentScoreKey
+export const selectPlayer2IsFirst = state => state.quarto.player2IsFirst
 
 export default quartoSlice.reducer
