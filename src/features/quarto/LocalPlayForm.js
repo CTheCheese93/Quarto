@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectGameStarted, playPressed, selectPlayerHasWon, selectCurrentPlayer, selectPlayers, selectScores, selectCurrentScoreKey } from './quartoSlice'
+import { selectGameStarted, playPressed, selectPlayerHasWon, selectCurrentPlayer, selectPlayers, selectScores, selectCurrentScoreKey, selectAlphaNoticeAccepted } from './quartoSlice'
 import { Form, Button, Modal, Alert } from 'react-bootstrap'
 import { PLAYER_ROLE } from './CONSTANTS'
 
@@ -29,6 +29,7 @@ const LocalPlayForm = () => {
 
     const dispatch = useDispatch()
     const gameStarted = useSelector(selectGameStarted)
+    const alphaNoticeAccepted = useSelector(selectAlphaNoticeAccepted)
     const playerHasWon = useSelector(selectPlayerHasWon)
     const currentPlayer = useSelector(selectCurrentPlayer)
     const players = useSelector(selectPlayers)
@@ -67,7 +68,7 @@ const LocalPlayForm = () => {
     const [player1Score, player2Score] = checkForScores()
 
     return (
-        <Modal show={!gameStarted} className="game-menu">
+        <Modal show={(gameStarted === false && alphaNoticeAccepted === true) ? true : false} className="game-menu">
             <Modal.Header style={{justifyContent: 'center'}}>
                 <Modal.Title>Let's Play Quarto!</Modal.Title>
             </Modal.Header>

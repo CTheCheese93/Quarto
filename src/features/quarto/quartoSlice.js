@@ -7,6 +7,7 @@ const initialState = {
     currentPlayer: PLAYER_ROLE.PLAYER_1,
     gameStarted: false,
     activePlayers: [],
+    alphaNoticeAccepted: false,
     availablePieces: [],
     gameLog: [],
     scores: {},
@@ -204,6 +205,9 @@ const quartoSlice = createSlice({
 
             state.gameHistory.push(createGameHistoryItem(state))
         },
+        alphaNoticeWasAccepted: (state) => {
+            state.alphaNoticeAccepted = true
+        },
         pieceCardClicked: (state, action) => {
             if (state.gameStarted === false || state.currentPhase === PHASE.PLACE)
                 return
@@ -313,7 +317,7 @@ const quartoSlice = createSlice({
     }
 })
 
-export const { playPressed, pieceCardClicked, gameBoardTilePressed, newGamePressed, previousTurnPressed, nextTurnPressed } = quartoSlice.actions
+export const { playPressed, alphaNoticeWasAccepted, pieceCardClicked, gameBoardTilePressed, newGamePressed, previousTurnPressed, nextTurnPressed } = quartoSlice.actions
 
 export const selectGameStarted = state => state.quarto.gameStarted
 export const selectPlayers = state => state.quarto.activePlayers
@@ -327,5 +331,6 @@ export const selectGameLog = state => state.quarto.gameLog
 export const selectScores = state => state.quarto.scores
 export const selectCurrentScoreKey = state => state.quarto.currentScoreKey
 export const selectPlayer2IsFirst = state => state.quarto.player2IsFirst
+export const selectAlphaNoticeAccepted = state => state.quarto.alphaNoticeAccepted
 
 export default quartoSlice.reducer

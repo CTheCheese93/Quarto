@@ -1,5 +1,6 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
+import AlphaNoticeForm from './AlphaNoticeForm'
 import AvailablePieces from './AvailablePieces'
 import GameBoard from './GameBoard'
 import GameLog from './GameLog'
@@ -36,6 +37,7 @@ const Quarto = () => {
             <Row>
                 <Col>
                     <LocalPlayForm />
+                    <AlphaNoticeForm />
                 </Col>
             </Row>
             <Row>
