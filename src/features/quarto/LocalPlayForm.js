@@ -40,9 +40,13 @@ const LocalPlayForm = () => {
     const [player2Name, setPlayer2Name] = useState('')
     const [player2IsFirst, setPlayer2IsFirst] = useState(false)
 
+    const [rulesHidden, setRulesHidden] = useState(true)
+
     const handlePlayer1Change = (e) => setPlayer1Name(e.target.value)
     const handlePlayer2Change = (e) => setPlayer2Name(e.target.value)
     const handleisFirstChange = (e) => setPlayer2IsFirst(e.target.checked)
+    
+    const handleRulesToggle = (e) => setRulesHidden(!rulesHidden)
 
     const onPlayClicked = (e) => {
         e.preventDefault()
@@ -123,11 +127,53 @@ const LocalPlayForm = () => {
                         <Form.Check type="checkbox" label="Player 2 starts" name="player2isFirst" onChange={handleisFirstChange} value={player2IsFirst} />
                     </Form.Group>
                     <div className="d-flex justify-content-end">
-                        <Button variant="primary" type="submit" disabled={(player1Name !== "" && player2Name !== "") ? false : true }>
+                        <Button variant="outline-primary" onClick={handleRulesToggle}>
+                            {rulesHidden ? 'Show' : 'Hide'} Rules
+                        </Button>
+                        <Button variant="primary" type="submit" disabled={(player1Name !== "" && player2Name !== "") ? false : true } style={{marginLeft: '10px'}}>
                             Play {playerHasWon ? 'Again' : 'Now!'}
                         </Button>
                     </div>
                 </Form>
+                <div className={rulesHidden ? 'hidden' : ''}>
+                    <h3>Components</h3>
+                    <ul>
+                        <li>Board with 16 squares</li>
+                        <li>
+                            16 pieces with 4 characteristics:
+                            <ul>
+                                <li>Color</li>
+                                <li>Shape</li>
+                                <li>Size</li>
+                                <li>Core (Solid or Hollow)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h3>Objective</h3>
+                    <ul>
+                        <li>    
+                            Establish a line of four pieces with at least one common characteristic on the board.
+                        </li>
+                    </ul>
+                    <h3>Game Play</h3>
+                    <ul>
+                        <li>    
+                            First player (P1) selects one of the 16 pieces, giving it to the opponent (P2)
+                        </li>
+                        <li>    
+                            Opponent (P2) places the piece on any open space on the board
+                        </li>
+                        <li>    
+                            Opponent (P2) selects one of the availabe piecse, giving it to the first player (P1)
+                        </li>
+                        <li>    
+                            First player (P1) places the piece on any open space on the board
+                        </li>
+                        <li>    
+                            Repeat until someone wins or a tie
+                        </li>
+                    </ul>
+                </div>
             </Modal.Body>
         </Modal>
     )
