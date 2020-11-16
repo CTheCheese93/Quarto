@@ -1,10 +1,19 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectGameStarted, playPressed, selectPlayerHasWon, selectCurrentPlayer, selectPlayers, selectScores, selectCurrentScoreKey } from './quartoSlice'
-import { Form, Button, Modal } from 'react-bootstrap'
+import { Form, Button, Modal, Alert } from 'react-bootstrap'
 import { PLAYER_ROLE } from './CONSTANTS'
 
 const LocalPlayForm = () => {
+    const horizontalBarStyle = {
+        height: '1px',
+        marginTop: '5px',
+        marginBottom: '5px',
+        width: '30%',
+        borderRadius: '50%',
+        backgroundColor: '#000'
+    }
+
     const scoreStyle = {
         display: 'flex',
         margin: '10px 0',
@@ -59,15 +68,29 @@ const LocalPlayForm = () => {
 
     return (
         <Modal show={!gameStarted} className="game-menu">
-            <Modal.Header>
-                <Modal.Title>{playerHasWon ? `${player.name} wins!` : 'Quarto'}</Modal.Title>
+            <Modal.Header style={{justifyContent: 'center'}}>
+                <Modal.Title>Let's Play Quarto!</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                {
+                    playerHasWon === true
+                    ? (
+                        <Alert 
+                            variant={'info'}
+                            style={{textAlign: 'center'}}>
+                            <div>
+                                {player.name} Wins!
+                            </div>
+                        </Alert>
+                    )
+                    : ''
+                }
                 <div style={scoreStyle}>
                     <div style={playerScoreStyle}>
                         <div className="player-name">
-                            {player1Name}
+                            {player1Name === "" ? 'Player 1' : player1Name}
                         </div>
+                        <div style={horizontalBarStyle}></div>
                         <div className="player-score">
                             {player1Score}
                         </div>
@@ -77,8 +100,9 @@ const LocalPlayForm = () => {
                     </div>
                     <div style={playerScoreStyle}>
                         <div className="player-name">
-                            {player2Name}
+                            {player2Name === "" ? 'Player 2' : player2Name}
                         </div>
+                        <div style={horizontalBarStyle}></div>
                         <div className="player-score">
                             {player2Score}
                         </div>
@@ -93,12 +117,15 @@ const LocalPlayForm = () => {
                         <Form.Label>Player 2's Name</Form.Label>
                         <Form.Control type="text" placeholder="Player 2" name="player2" onChange={handlePlayer2Change} onBlur={checkForScores} value={player2Name} />
                     </Form.Group>
-                    <Form.Group controlId="player-2-isFirst">
+                    <hr />
+                    <Form.Group controlId="player-2-isFirst" className="d-flex justify-content-center">
                         <Form.Check type="checkbox" label="Player 2 starts" name="player2isFirst" onChange={handleisFirstChange} value={player2IsFirst} />
                     </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Play {playerHasWon ? 'Again' : ''}
-                    </Button>
+                    <div className="d-flex justify-content-end">
+                        <Button variant="primary" type="submit" disabled={(player1Name !== "" && player2Name !== "") ? false : true }>
+                            Play {playerHasWon ? 'Again' : 'Now!'}
+                        </Button>
+                    </div>
                 </Form>
             </Modal.Body>
         </Modal>
