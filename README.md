@@ -6,6 +6,6 @@ This project has no monetary intent and the code will be freely available to eve
 
 I'm really excited to be working on this project and hope to see a few features be added over time.
 
-Currently, local play seems to be "working". At the time of this writing "working" means that you can run this on your local machine and play multiple rounds with very limited graphics and certain features (namely Game History) are not implemented yet.
+Currently, local play seems to be "working". At the time of this writing "working" means that you can run this on your local machine and play multiple rounds. Data is no persistent beyond the current session, refreshing will lose your data. I have considered using LocalStorage to hold onto scores, my reasoning for not hasn't been fully explored but I bet it has to do with my last experience with it was when I was working on backend systems and had a habit to avoid LocalStorage.
 
-Currently I am on Sprint 2, Week 1 of 2 and in the process of creating a video of Sprint 1 outlining my Design and Development process so far. This will be a series posted on YouTube that will be on-going and evolve as the nature of the project does too.
+v0.1a was released at the end of Sprint 2 (11/15/20) and announced the next day. Sprint 3's objectives are currently being chosen.
