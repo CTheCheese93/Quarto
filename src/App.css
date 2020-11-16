@@ -56,24 +56,24 @@ html {
   --thumbBG: #536B78;
 }
 
-.game-log::-webkit-scrollbar,
+.game-log-list::-webkit-scrollbar,
 .piece-list::-webkit-scrollbar {
   width: 11px;
 }
 
-.game-log,
+.game-log-list,
 .piece-list {
   scrollbar-width: thin;
   scrollbar-color: var(--thumbBG) var(--scrollbarBG);
 }
 
-.game-log::-webkit-scrollbar-track,
+.game-log-list::-webkit-scrollbar-track,
 .piece-list::-webkit-scrollbar-track {
   background: var(--scrollbarBG);
   border-radius: 5px;
 }
 
-.game-log::-webkit-scrollbar-thumb,
+.game-log-list::-webkit-scrollbar-thumb,
 .piece-list::-webkit-scrollbar-thumb {
   background-color: var(--thumbBG) ;
   border-radius: 5px;

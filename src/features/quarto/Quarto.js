@@ -45,7 +45,7 @@ const Quarto = () => {
                     <GamePhaseTracker />
                     <AvailablePieces />
                 </Col>
-                <Col sm={6} style={gameBoardAreaStyle}>
+                <Col sm={6} className="game-board-area" style={gameBoardAreaStyle}>
                     <GameBoard />
                 </Col>
                 <Col sm={3} style={rightPanelStyle}>
