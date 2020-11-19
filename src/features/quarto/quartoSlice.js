@@ -1,5 +1,6 @@
 import { createSlice, current } from '@reduxjs/toolkit'
 import { PHASE, PLAYER_ROLE, SIZE, COLOR, SHAPE, CORE } from './CONSTANTS'
+import { generateScoreKey } from './Helpers'
 
 const initialState = {
     currentStep: 0,
@@ -17,10 +18,6 @@ const initialState = {
     gameHistory: [],
     currentScoreKey: "",
     player2IsFirst: false
-}
-
-const createPlayer = (name, role) => {
-    return { name, role }
 }
 
 const generatePieces = () => {
@@ -132,12 +129,6 @@ const winCheck = (boardState) => {
 
         let check1 = comparePieces(pieces)
         let check2 = comparePieces(invertedPieces)
-        // let check1Base2 = check1.toString(2)
-        // let check2Base2 = check2.toString(2)
-        // let pieceLog = [piece1, piece2, piece3, piece4].map((p, i) => {
-        //     return {[`Piece ${i}`]: p.pieceId}
-        // })
-        // console.log({check1, check1Base2, check2, check2Base2, ...pieceLog})
 
         if (check1 || check2) {
             return true
@@ -172,27 +163,26 @@ const quartoSlice = createSlice({
     initialState,
     reducers: {
         playPressed: (state, action) => {
-            const { player1, player2, player2isFirst } = action.payload
-            const sortedPlayers = [player1, player2].sort()
-            const scoreKey = `${sortedPlayers[0]}-${sortedPlayers[1]}`
+            const { player1Name, player2Name, player2IsFirst } = action.payload
+            const scoreKey = generateScoreKey(player1Name, player2Name)
 
             if (!(scoreKey in state.scores)){    
                 state.scores[scoreKey] = {
-                    [player1]: 0,
-                    [player2]: 0
+                    [player1Name]: 0,
+                    [player2Name]: 0
                 }
             }
             
             state.currentScoreKey = scoreKey
 
-            const players = [player1, player2].map((name, index) => {
+            const players = [player1Name, player2Name].map((name, index) => {
                 return {name, role: PLAYER_ROLE[index]}
             })
 
             state.activePlayers = players
 
-            state.currentPlayer = player2isFirst ? PLAYER_ROLE.PLAYER_2 : PLAYER_ROLE.PLAYER_1
-            state.player2IsFirst = player2isFirst
+            state.currentPlayer = player2IsFirst ? PLAYER_ROLE.PLAYER_2 : PLAYER_ROLE.PLAYER_1
+            state.player2IsFirst = player2IsFirst
             state.availablePieces = generatePieces()
             state.currentBoardSnapshot = Array(16).fill({ pieceId: null, pieceIdBase2: null })
             state.currentStep = 0
@@ -233,9 +223,6 @@ const quartoSlice = createSlice({
             } else {
                 state.gameHistory.push(createGameHistoryItem(state))
             }
-        },
-        newGamePressed: (state, action) => {
-            console.log("New Game Pressed")
         },
         previousTurnPressed: (state) => {
             const previousStep = state.currentStep === 0 ? 0 : state.currentStep - 1

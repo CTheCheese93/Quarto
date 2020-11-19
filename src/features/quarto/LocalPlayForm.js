@@ -51,7 +51,7 @@ const LocalPlayForm = () => {
     const onPlayClicked = (e) => {
         e.preventDefault()
         if (Boolean(player1Name) && Boolean(player2Name)) {
-            dispatch(playPressed({player1: player1Name, player2: player2Name, player2isFirst: player2IsFirst}))
+            dispatch(playPressed({player1Name, player2Name, player2IsFirst}))
         }
     }
     

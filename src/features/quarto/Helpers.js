@@ -19,6 +19,11 @@ export const generatePieceDescriptionById = (pieceId) => {
     return generatePieceDescription(generatePieceProperties(pieceId))
 }
 
+export const generateScoreKey = (player1Name, player2Name) => {
+    const sortedPlayers = [player1Name, player2Name].sort()
+    return `${sortedPlayers[0]}-${sortedPlayers[1]}`
+}
+
 export const TimeAgo = ({timestamp}) => {
     let timeAgo = ''
 

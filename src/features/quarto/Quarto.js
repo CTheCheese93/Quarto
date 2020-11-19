@@ -35,20 +35,20 @@ const Quarto = () => {
     return (
         <Container fluid className="quarto">
             <Row>
-                <Col>
+                <Col class>
                     <LocalPlayForm />
                     <AlphaNoticeForm />
                 </Col>
             </Row>
             <Row>
-                <Col sm={3} style={leftPanelStyle}>
+                <Col sm={3} className="left-panel" style={leftPanelStyle}>
                     <GamePhaseTracker />
                     <AvailablePieces />
                 </Col>
                 <Col sm={6} className="game-board-area" style={gameBoardAreaStyle}>
                     <GameBoard />
                 </Col>
-                <Col sm={3} style={rightPanelStyle}>
+                <Col sm={3} className="right-panel" style={rightPanelStyle}>
                     <RoomRoster />
                     <GameLog />
                 </Col>
