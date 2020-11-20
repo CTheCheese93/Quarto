@@ -35,7 +35,7 @@ const Quarto = () => {
     return (
         <Container fluid className="quarto">
             <Row>
-                <Col class>
+                <Col>
                     <LocalPlayForm />
                     <AlphaNoticeForm />
                 </Col>
