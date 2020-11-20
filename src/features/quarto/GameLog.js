@@ -13,7 +13,7 @@ const GameLog = () => {
 
     const gameLogStyle = {
         padding: '10px',
-        borderRadius: '35px 0px 0px 0px',
+        borderRadius: '15px 0px 0px 0px',
         background: '#fff',
         marginTop: '10px',
         flex: '1',
@@ -60,7 +60,7 @@ const GameLog = () => {
 
     return (
         <div className="game-log" style={gameLogStyle}>
-            <div className="title dark" style={{textAlign: 'center'}}>Game Log</div>
+            <div className="title dark" style={{textAlign: 'center', paddingBottom: '5px'}}>Game Log</div>
             <div className="game-log-list" style={gllStyle} ref={gameLogListRef}>
                 {gameLogCards}
             </div>

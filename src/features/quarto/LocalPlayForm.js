@@ -138,7 +138,7 @@ const LocalPlayForm = () => {
                 <div className={rulesHidden ? 'hidden' : ''}>
                     <h3>Components</h3>
                     <ul>
-                        <li>Board with 16 squares</li>
+                        <li>Board with 16 circles</li>
                         <li>
                             16 pieces with 4 characteristics:
                             <ul>
@@ -164,7 +164,7 @@ const LocalPlayForm = () => {
                             Opponent (P2) places the piece on any open space on the board
                         </li>
                         <li>    
-                            Opponent (P2) selects one of the availabe piecse, giving it to the first player (P1)
+                            Opponent (P2) selects one of the availabe pieces, giving it to the first player (P1)
                         </li>
                         <li>    
                             First player (P1) places the piece on any open space on the board

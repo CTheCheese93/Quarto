@@ -26,7 +26,7 @@ const GameLogCard = ({player, phase, pieceId, timestamp, isFirst, tileIndex}) =>
         margin: '10px',
         marginTop: isFirst === true ? 'auto' : '10px',
         padding: '10px',
-        borderRadius: '5px',
+        borderRadius: '0px 15px 0px 15px',
         background: getPlayerBGColor(),
     }
 

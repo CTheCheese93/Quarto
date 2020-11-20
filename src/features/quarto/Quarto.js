@@ -7,6 +7,7 @@ import GameLog from './GameLog'
 import GamePhaseTracker from './GamePhaseTracker'
 import LocalPlayForm from './LocalPlayForm'
 import RoomRoster from './RoomRoster'
+import RulesModal from './RulesModal'
 
 const Quarto = () => {
     const leftPanelStyle = {
@@ -38,6 +39,7 @@ const Quarto = () => {
                 <Col>
                     <LocalPlayForm />
                     <AlphaNoticeForm />
+                    <RulesModal />
                 </Col>
             </Row>
             <Row>

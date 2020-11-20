@@ -5,9 +5,9 @@ import { selectPlayers } from './quartoSlice'
 
 const RoomRoster = () => {
     const roomRosterStyle = {
-        padding: '20px 10px 20px 20px',
+        padding: '15px',
         background: '#7C98B3',
-        borderRadius: '0px 0px 0px 35px'
+        borderRadius: '0px 0px 0px 15px'
     }
 
     const players = useSelector(selectPlayers)
@@ -15,8 +15,8 @@ const RoomRoster = () => {
     const playerList = players.map((player) => {
         const playerCardStyle = {
             padding: '5px',
-            paddingLeft: '15px',
-            borderRadius: '0px 19px 0px 19px',
+            paddingLeft: '10px',
+            borderRadius: '0px 15px 0px 15px',
             background: '#fff',
             marginTop: '10px'
         }

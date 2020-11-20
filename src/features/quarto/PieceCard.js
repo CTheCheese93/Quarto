@@ -14,7 +14,7 @@ const PieceCard = ({pieceId, pieceIdBase2}) => {
     const pieceCardStyle = {
         width: '125px',
         height: '125px',
-        borderRadius: '15px 0px 15px 0px',
+        borderRadius: '0px 15px 0px 15px',
         background: '#fff',
         display: 'flex',
         alignItems: 'center',

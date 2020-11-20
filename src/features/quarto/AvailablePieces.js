@@ -13,7 +13,7 @@ const AvailablePieces = () => {
         padding: '10px',
         marginTop: '10px',
         background: '#7C98B3',
-        borderRadius: '0px 35px 0px 0px',
+        borderRadius: '0px 15px 0px 0px',
     }
     
     const pieceListStyle = {

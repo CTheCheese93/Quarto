@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { PLAYER_ROLE } from './CONSTANTS'
-import { newGamePressed, nextTurnPressed, previousTurnPressed, selectPlayers, selectPlayer2IsFirst, playPressed } from './quartoSlice'
+import { newGamePressed, nextTurnPressed, previousTurnPressed, selectPlayers, selectPlayer2IsFirst, playPressed, toggleShowRules } from './quartoSlice'
 
 
 const Stepper = () => {
@@ -19,7 +19,7 @@ const Stepper = () => {
     }
 
     const buttonStyle = {
-        width: '29%',
+        width: '23%',
         borderRadius: '300px',
         backgroundColor: '#536B78',
     }
@@ -36,10 +36,14 @@ const Stepper = () => {
         dispatch(nextTurnPressed())
     }
 
+    const handleRulesPressed = (e) => {
+        dispatch(toggleShowRules())
+    }
 
     return (
         <div className="stepper" style={stepperStyle}>
             <Button style={buttonStyle} onClick={handleNewGamePressed}><i className="fas fa-plus"></i></Button>
+            <Button style={buttonStyle} onClick={handleRulesPressed}><i className="fas fa-question"></i></Button>
             <Button style={buttonStyle} onClick={handlePrevTurnPressed}><i className="fas fa-angle-left"></i></Button>
             <Button style={buttonStyle} onClick={handleNextTurnPressed}><i className="fas fa-angle-right"></i></Button>
         </div>

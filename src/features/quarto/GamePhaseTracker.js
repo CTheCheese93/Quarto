@@ -20,7 +20,7 @@ const GamePhaseTracker = () => {
 
     const gptStyle = {
         background: '#fff',
-        borderRadius: '0px 0px 35px 0px',
+        borderRadius: '0px 0px 15px 0px',
         padding: '10px'
     }
 

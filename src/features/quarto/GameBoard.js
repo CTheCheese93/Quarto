@@ -10,7 +10,7 @@ const GameBoard = () => {
         overflow: 'hidden',
         padding: '3%',
         background: '#7C98B3',
-        borderRadius: '2%',
+        borderRadius: '15px',
     }
 
     const outlineStyle = {
